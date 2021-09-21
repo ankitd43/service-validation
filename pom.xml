@@ -59,6 +59,22 @@
       <scope>test</scope>
     </dependency>
 
+   <dependency> 
+   <groupId>org.projectlombok</groupId> 
+   <artifactId>lombok</artifactId> 
+   <version>1.18.20</version> <scope>provided</scope>
+    </dependency>
+<dependency>
+  <groupId>commons-validator</groupId>
+  <artifactId>commons-validator</artifactId>
+  <version>1.7</version>
+</dependency>
+
+<dependency>
+      <groupId>org.iban4j</groupId>
+      <artifactId>iban4j</artifactId>
+      <version>1.0.0</version>
+</dependency>
     <!-- Databases - Uses HSQL by default -->
     <dependency>
       <groupId>org.hsqldb</groupId>
