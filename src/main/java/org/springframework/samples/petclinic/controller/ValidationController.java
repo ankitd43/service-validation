@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.model.ValidationResponse;
 import org.springframework.samples.petclinic.service.AddressDetailService;
 import org.springframework.samples.petclinic.service.BankStatementDetailService;
 import org.springframework.samples.petclinic.service.CustomerDetailService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,6 +30,10 @@ public class ValidationController {
     @Autowired
     private BankStatementDetailService bankStatementDetailService;
 
+    @GetMapping(value = "/ping")
+    public String ping(){
+        return "Ping Success";
+    }
 
     @PostMapping(value="/validateEmail" , consumes = MediaType.APPLICATION_JSON_VALUE)
     public ValidationResponse validateEmail(@RequestBody EmailValidationRequest emailValidationRequest) {
