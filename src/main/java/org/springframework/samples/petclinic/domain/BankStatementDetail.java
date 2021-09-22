@@ -12,22 +12,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDetail {
+public class BankStatementDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private Long id;
-
-    @Column(name="account_number")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long transactionReference;
+    
+    @Column(name ="account_number")
     private String accountNumber;
 
-    @Column(name="phone_number")
-    private Long phoneNumber;
+    @Column(name ="start_balance")
+    private String startBalance;
 
-    @Column(name="transaction_reference")
-    private Long transactionReference;
+    @Column(name ="end_alance")
+    private String endBalance;
 
-    @Column(name="email_id")
-    private String emailId;
-
+    private String mutation;
+    
+    private String description;
 }

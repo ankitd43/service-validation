@@ -12,6 +12,6 @@ public class PhoneNoValidationRequest {
     
     private String accountNumber;
     private Long phoneNumber;
-    private Long transactionNumber;
+    private Long transactionReference;
     
 }

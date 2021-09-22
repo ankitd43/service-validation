@@ -18,4 +18,13 @@ public class RequestWrapper<T> {
     public static RequestWrapper<?> forname(){
         return new RequestWrapper<>();
     }
+
+    public void setMessage(String message){
+        if("SUCCESS".equals(message)){
+            this.setSuccess(true);
+        }else {
+            this.setError(true);
+        }
+        this.message = message;
+    }
 }

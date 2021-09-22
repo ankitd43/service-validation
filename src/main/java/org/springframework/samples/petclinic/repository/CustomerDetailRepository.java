@@ -7,8 +7,8 @@ public interface CustomerDetailRepository extends JpaRepository<CustomerDetail, 
 
     CustomerDetail findByEmailIdOrAccountNumber(String emailId , String accountNo );
 
-    CustomerDetail findByPhoneNumberOrAccountNumber(String phoneNo , String accountNo );
+    CustomerDetail findByPhoneNumberOrAccountNumber(Long phoneNo , String accountNo );
 
-    CustomerDetail findByAccountNumber(String emailId , String accountNo );
+    CustomerDetail findByAccountNumber(String accountNo );
 
 }

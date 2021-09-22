@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.service.impl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.domain.CustomerDetail;
+import org.springframework.samples.petclinic.model.AddressValidationRequest;
 import org.springframework.samples.petclinic.model.EmailValidationRequest;
 import org.springframework.samples.petclinic.model.PhoneNoValidationRequest;
 import org.springframework.samples.petclinic.model.RequestWrapper;
@@ -30,7 +32,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService{
                 customerDetail = new CustomerDetail();
             }else{
                 if(emailId.equals(customerDetail.getEmailId())){
-                    if(!accountNumber.equals(customerDetail.getAccountNumber())){
+                    if(accountNumber.equals(customerDetail.getAccountNumber())){
                         requestWrapper.setMessage("SUCCESS");
                     }else{
                         requestWrapper.setMessage("DUPLICATE_ACCOUNT_NO");
@@ -40,7 +42,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService{
                 }
 
                 if(accountNumber.equals(customerDetail.getAccountNumber())){
-                    if(!emailId.equals(customerDetail.getEmailId())){
+                    if(emailId.equals(customerDetail.getEmailId())){
                         requestWrapper.setMessage("SUCCESS");
                     }else{
                         requestWrapper.setMessage("DUPLICATE_EMAIL_ID");
@@ -48,49 +50,62 @@ public class CustomerDetailServiceImpl implements CustomerDetailService{
                 }else{
                     requestWrapper.setMessage("INCORRECT_ACCOUNT_NO");
                 }
+            } if(requestWrapper.isSuccess()){
+                BeanUtils.copyProperties(emailValidationRequest, customerDetail);
+                customerDetailRepository.save(customerDetail);
             } 
-        }else{
-            requestWrapper.setMessage("SUCCESS");
         }
+        if(requestWrapper.isError())
+            requestWrapper.getMap().put("accountNumber","account_number_of_error_record");
+
+        validationResponse.setResult(requestWrapper.getMessage());
+        validationResponse.setErrorRecords(requestWrapper.getMap());
         validationResponse.setResult(requestWrapper.getMessage());
         return validationResponse;
     }
 
     @Override
-    public ValidationResponse validationPhoneNO(PhoneNoValidationRequest phoneNoValidationRequest ){
+    public ValidationResponse validationPhoneNo(PhoneNoValidationRequest phoneNoValidationRequest ){
         ValidationResponse validationResponse = new ValidationResponse();
-        RequestWrapper<?> requestWrapper =  validationService.validateEmail(phoneNoValidationRequest);
-        if(requestWrapper.isError()){
+        RequestWrapper<?> requestWrapper =  validationService.validatePhoneNo(phoneNoValidationRequest);
+        if(requestWrapper.isSuccess()){
             String accountNumber = phoneNoValidationRequest.getAccountNumber();
-            Long emailId = phoneNoValidationRequest.getPhoneNumber();
-            CustomerDetail customerDetail = customerDetailRepository.findByEmailIdOrAccountNumber(emailId, accountNumber);
+            Long phoneNo = phoneNoValidationRequest.getPhoneNumber();
+            CustomerDetail customerDetail = customerDetailRepository.findByPhoneNumberOrAccountNumber(phoneNo, accountNumber);
             if(customerDetail == null){
                 customerDetail = new CustomerDetail();
             }else{
-                if(emailId.equals(customerDetail.getEmailId())){
-                    if(!accountNumber.equals(customerDetail.getAccountNumber())){
+                if(phoneNo.equals(customerDetail.getPhoneNumber())){
+                    if(accountNumber.equals(customerDetail.getAccountNumber())){
                         requestWrapper.setMessage("SUCCESS");
                     }else{
                         requestWrapper.setMessage("DUPLICATE_ACCOUNT_NO");
                     }
                 }else{
-                    requestWrapper.setMessage("INCORRECT_EMAIL_ID");
+                    requestWrapper.setMessage("INCORRECT_PHONE_NO");
                 }
 
                 if(accountNumber.equals(customerDetail.getAccountNumber())){
-                    if(!emailId.equals(customerDetail.getEmailId())){
+                    if(phoneNo.equals(customerDetail.getPhoneNumber())){
                         requestWrapper.setMessage("SUCCESS");
                     }else{
-                        requestWrapper.setMessage("DUPLICATE_EMAIL_ID");
+                        requestWrapper.setMessage("DUPLICATE_PHONE_NO");
                     }
                 }else{
                     requestWrapper.setMessage("INCORRECT_ACCOUNT_NO");
                 }
+            }
+            if(requestWrapper.isSuccess()){
+                BeanUtils.copyProperties(phoneNoValidationRequest, customerDetail);
+                customerDetailRepository.save(customerDetail);
             } 
-        }else{
-            requestWrapper.setMessage("SUCCESS");
         }
+        if(requestWrapper.isError())
+            requestWrapper.getMap().put("accountNumber","account_number_of_error_record");
         validationResponse.setResult(requestWrapper.getMessage());
+        validationResponse.setErrorRecords(requestWrapper.getMap());
         return validationResponse;
     }
+
+    
 }
