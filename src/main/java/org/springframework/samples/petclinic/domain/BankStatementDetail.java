@@ -16,9 +16,10 @@ public class BankStatementDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name="transaction_reference")
     private Long transactionReference;
     
-    @Column(name ="account_number")
+    @Column(name ="account_number", unique = true)
     private String accountNumber;
 
     @Column(name ="start_balance")

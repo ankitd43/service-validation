@@ -29,10 +29,11 @@ public class BankStatementDetailServiceImpl implements BankStatementDetailServic
             BankStatementDetail bankStatementDetail = bankStatementDetailRepository.findByAccountNumber(accountNumber);
             if(bankStatementDetail == null){
                 bankStatementDetail = new BankStatementDetail();
-            }else{
-                BeanUtils.copyProperties(bankStatementValidationRequest, bankStatementDetail, "accountNumber");
-                bankStatementDetailRepository.save(bankStatementDetail); 
             }
+           // bankStatementValidationRequest.get
+            BeanUtils.copyProperties(bankStatementValidationRequest, bankStatementDetail, "accountNumber");
+            bankStatementDetailRepository.save(bankStatementDetail); 
+            
         }
         if(requestWrapper.isError())
             requestWrapper.getMap().put("accountNumber","account_number_of_error_record");
