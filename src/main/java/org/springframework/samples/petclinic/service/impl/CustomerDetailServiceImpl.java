@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.domain.CustomerDetail;
-import org.springframework.samples.petclinic.model.AddressValidationRequest;
 import org.springframework.samples.petclinic.model.EmailValidationRequest;
 import org.springframework.samples.petclinic.model.PhoneNoValidationRequest;
 import org.springframework.samples.petclinic.model.RequestWrapper;
@@ -11,7 +10,9 @@ import org.springframework.samples.petclinic.model.ValidationResponse;
 import org.springframework.samples.petclinic.repository.CustomerDetailRepository;
 import org.springframework.samples.petclinic.service.CustomerDetailService;
 import org.springframework.samples.petclinic.service.ValidationService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerDetailServiceImpl implements CustomerDetailService{
     
     @Autowired

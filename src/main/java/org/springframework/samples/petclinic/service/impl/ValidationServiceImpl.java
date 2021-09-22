@@ -6,7 +6,10 @@ import org.springframework.samples.petclinic.model.EmailValidationRequest;
 import org.springframework.samples.petclinic.model.PhoneNoValidationRequest;
 import org.springframework.samples.petclinic.model.RequestWrapper;
 import org.springframework.samples.petclinic.service.*;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+@Service
 public class ValidationServiceImpl implements ValidationService {
     
     @Override
@@ -27,7 +30,7 @@ public class ValidationServiceImpl implements ValidationService {
     public RequestWrapper<?> validatePhoneNo(PhoneNoValidationRequest phoneNoValidationRequest){
         Assert.isNull(phoneNoValidationRequest.getPhoneNumber(), "Phone No should not be null or empty");
         Assert.isNull(phoneNoValidationRequest.getAccountNumber(), "Account No should not be null or empty");
-        Assert.isNull(phoneNoValidationRequest.getTransactionNumber(), "Transaction No should not be null or empty");
+        //Assert.isNull(phoneNoValidationRequest.getTransactionNumber(), "Transaction No should not be null or empty");
         RequestWrapper<?> requestWrapper = ValidationHelper.validatePhoneNo(phoneNoValidationRequest.getPhoneNumber());
 
         if(requestWrapper.isSuccess()){

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.domain.BankStatementDetail;
 import org.springframework.samples.petclinic.helper.ValidationHelper;
 import org.springframework.samples.petclinic.model.RequestWrapper;
-import org.springframework.samples.petclinic.model.ValidationResponse;
 import org.springframework.samples.petclinic.repository.BankStatementDetailRepository;
 
 
