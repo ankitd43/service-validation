@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +20,7 @@ public class BankStatementDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name="transaction_reference")
+    @Column(name="transaction_reference")
     private Long transactionReference;
     
     @Column(name ="account_number", unique = true)
@@ -36,4 +35,6 @@ public class BankStatementDetail {
     private String mutation;
     
     private String description;
+
+    //private CustomerDetail customerDetail;
 }

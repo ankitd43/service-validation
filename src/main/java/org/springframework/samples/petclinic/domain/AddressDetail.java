@@ -28,7 +28,7 @@ public class AddressDetail {
 
     private String name;
 
-    @Column(name ="account_number")
+    @Column(name ="door_number")
     private String doorNumber;
 
     @Column(name ="address_line1")

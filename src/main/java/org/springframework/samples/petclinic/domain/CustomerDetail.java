@@ -24,9 +24,9 @@ public class CustomerDetail {
     private Long id;
 
     @MapsId
-    @OneToOne(mappedBy = "transactionReference", fetch = FetchType.EAGER)
+    @OneToOne( fetch = FetchType.EAGER)
     @JoinColumn(name="transaction_reference")
-    private Long transactionReference;
+    private BankStatementDetail bankStatementDetail ;
 
     @Column(name="account_number")
     private String accountNumber;
