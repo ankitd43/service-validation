@@ -30,7 +30,7 @@ public class ValidationController {
     @Autowired
     private BankStatementDetailService bankStatementDetailService;
 
-    @GetMapping(value = "/ping", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/ping")
     public String ping(){
         return "Ping Success";
     }
