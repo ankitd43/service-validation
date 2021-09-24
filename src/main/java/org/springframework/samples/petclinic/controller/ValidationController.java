@@ -37,7 +37,7 @@ public class ValidationController {
 
     @PostMapping(value="/validateEmail" , consumes = MediaType.APPLICATION_JSON_VALUE)
     public ValidationResponse validateEmail(@RequestBody EmailValidationRequest emailValidationRequest) {
-        
+        System.out.println("Enter in validateEmail()");
         ValidationResponse validationResponse = customerDetailService.validationEmail(emailValidationRequest);
         return validationResponse;
     }

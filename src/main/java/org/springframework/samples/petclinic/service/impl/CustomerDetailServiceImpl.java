@@ -23,6 +23,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService{
 
     @Override
     public ValidationResponse validationEmail(EmailValidationRequest emailValidationRequest ){
+        System.out.println("Enter in validateEmail()"+ emailValidationRequest.getAccountNumber());
         ValidationResponse validationResponse = new ValidationResponse();
         RequestWrapper<?> requestWrapper =  validationService.validateEmail(emailValidationRequest);
         if(requestWrapper.isError()){
